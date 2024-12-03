@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticky Position Rentcars</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <img src="logo.svg" alt="Logo">
+            <div class="menu"></div>
+        </div>
+    </header>
+    <main class="content">
+        <div class="container">
+            <div class="search"></div>
+            <div class="columns">
+                <div class="column left">
+                    <div class="card c-308"></div>
+                    <div class="card c-54"></div>
+                    <div class="card c-308"></div>
+                    <div class="card c-146"></div>
+                    <div class="card c-886"></div>
+                    <div class="card c-308"></div>
+                    <div class="card c-240"></div>
+                </div>
+                <div class="column right">
+                    <div class="card c-84 predicao"></div>
+                    <div class="details sua-reserva">
+                        <div class="head">
+                            <h4>Sua reserva</h4>
+                            <div class="tag days">5 diárias</div>
+                        </div>
+                        <div class="resume">
+                            <div class="detail">
+                                <div class="line">
+                                    <div class="label"><b>Valor do veículo</b></div>
+                                    <div class="value"><b>R$ 1.371,61</b></div>
+                                </div>
+                                <div class="group">
+                                    <div class="line">
+                                        <div class="label"><b>Plano Basic</b></div>
+                                        <div class="value"><b>R$ 84,20</b></div>
+                                    </div>
+                                    <div class="subline">
+                                        <img src="check_small.svg" alt="Check">
+                                        Proteção do veículo
+                                    </div>
+                                    <div class="subline">
+                                        <img src="check_small.svg" alt="Check">
+                                        Proteção contra terceiros
+                                    </div>
+                                    <div class="subline">
+                                        <img src="check_small.svg" alt="Check">
+                                        Condutor adicional grátis
+                                    </div>
+                                </div>
+                                <div class="line">
+                                    <div class="label"><b>Cobertura extra</b></div>
+                                    <div class="value"><b>R$ 636,99</b></div>
+                                </div>
+                                <div class="group">
+                                    <div class="line">
+                                        <div class="label"><b>Opcionais</b></div>
+                                        <div class="value"><b>R$ 619,47</b></div>
+                                    </div>
+                                    <div class="subline price">
+                                        <div class="label">2x Bebê conforto</div>
+                                        <div class="value">R$ 224,81</div>
+                                    </div>
+                                    <div class="subline price">
+                                        <div class="label">1x Cadeirinha de criança</div>
+                                        <div class="value">R$ 102,70</div>
+                                    </div>
+                                    <div class="subline price">
+                                        <div class="label">1x Condutor jovem</div>
+                                        <div class="value">R$ 240,97</div>
+                                    </div>
+                                    <div class="subline price">
+                                        <div class="label">1x Navegador GPS</div>
+                                        <div class="value">R$ 50,99</div>
+                                    </div>
+                                </div>
+                                <div class="line">
+                                    <div class="label"><b>Taxas da locadora</b></div>
+                                    <div class="value"><b>R$ 94,25</b></div>
+                                </div>
+                                <div class="line total">
+                                    <div class="label"><b>Valor total</b></div>
+                                    <div class="value"><b>R$ 2.806,52</b></div>
+                                </div>
+                            </div>
+                            <div class="tag cashback">Cashback de R$ 43,25</div>
+                        </div>
+                        <div class="action">
+                            <div class="button">Continuar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  const suaReserva = document.querySelector(".sua-reserva");
+  const header = document.querySelector("header");
+  const actions = document.querySelector(".action");
+  const ESPACO_FIXO = 16;
+
+  // Função para ajustar a altura do componente `.sua-reserva`
+  function ajustarAltura() {
+    const headerHeight = header.offsetHeight;
+    const viewportHeight = window.innerHeight;
+    const distanciaTopo = suaReserva.getBoundingClientRect().top;
+
+    const alturaDisponivel = viewportHeight - distanciaTopo - ESPACO_FIXO;
+    suaReserva.style.maxHeight = `${Math.max(alturaDisponivel, 0)}px`;
+
+    verificarScrollAtivo(); // Verifica o scroll sempre que ajustar a altura
+  }
+
+  // Função para verificar se o scroll está ativo em `.sua-reserva`
+  function verificarScrollAtivo() {
+    if (suaReserva.scrollHeight > suaReserva.clientHeight) {
+      actions.classList.add("fixo");
+    } else {
+      actions.classList.remove("fixo");
+    }
+  }
+
+  // Observa mudanças no conteúdo de `.sua-reserva` dinamicamente
+  const observer = new MutationObserver(() => {
+    ajustarAltura(); // Reajusta a altura quando o conteúdo muda
+  });
+  observer.observe(suaReserva, { childList: true, subtree: true });
+
+  // Inicializa os ajustes e verificações
+  ["load", "resize", "scroll"].forEach(evento => 
+    window.addEventListener(evento, ajustarAltura)
+  );
+
+  ajustarAltura(); // Executa no carregamento inicial
+});
+
+
+    </script>
+</body>
+</html>
